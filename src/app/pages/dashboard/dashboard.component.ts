@@ -113,10 +113,10 @@ export class DashboardComponent implements OnInit, OnDestroy{
   */
   getListColor(data: Array<Country>): Array<string> { 
     let listColor: string | null = sessionStorage.getItem('listColor')
-    
+  
     if (listColor != null) {
       return JSON.parse(listColor)
-    } 
+    }
     
     return this.generateColors(data);
   }
@@ -133,9 +133,12 @@ export class DashboardComponent implements OnInit, OnDestroy{
           .padStart(6, '0')}` // in case the number is too small to fill 6 hex digits
         )
     });
-    sessionStorage.setItem(
-      'listColor', JSON.stringify(domain)
-      );
+    if (domain.length > 0) {
+      sessionStorage.setItem(
+        'listColor', JSON.stringify(domain)
+        );
+    }
+
     return domain;
   }
 }
